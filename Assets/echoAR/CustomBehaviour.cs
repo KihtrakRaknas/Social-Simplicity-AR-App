@@ -25,7 +25,7 @@ public class CustomBehaviour : MonoBehaviour
     {
         // Add RemoteTransformations script to object and set its entry
         this.gameObject.AddComponent<RemoteTransformations>().entry = entry;
-
+        this.gameObject.transform.localScale = new Vector3(0, 0, 0);
         // Qurey additional data to get the name
         string value = "";
         if (entry.getAdditionalData() != null && entry.getAdditionalData().TryGetValue("name", out value))
