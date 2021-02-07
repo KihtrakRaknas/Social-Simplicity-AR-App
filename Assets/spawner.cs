@@ -19,10 +19,11 @@ public class spawner : MonoBehaviour
     private string jsonResponse;
     public static string username;
     public static string password;
+    private string str;
     void Start()
     {
         Debug.Log("anddeb - start");
-        string str = String.Format("https://social-simplicity-21.herokuapp.com/get-posts-unity?username={0}&password={0}", username, password);
+        str = String.Format("https://social-simplicity-21.herokuapp.com/get-posts-unity?username={0}&password={0}", username, password);
         Debug.Log("anddeb - "+ str);
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(str);
         Debug.Log("anddeb - req");
@@ -91,10 +92,17 @@ public class spawner : MonoBehaviour
 
             //imageInstance
             //Debug.Log("anddeb - p -" + N[0]["displayUrl"].Value);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(str);
+            Debug.Log("anddeb - req");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Debug.Log("anddeb - res");
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            jsonResponse = reader.ReadToEnd();
             Debug.Log("url+");
             Debug.Log(jsonResponse);
             Debug.Log("url-");
             StartCoroutine(DownloadImage(jsonResponse, imageObject, gameObject));
+
             //Debug.Log("anddeb - p -" + N[0]["displayUrl"].Value);
             //post.displayUrl;
             //gameObject.chil=
